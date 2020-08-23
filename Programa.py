@@ -45,9 +45,11 @@ xxr = np.arange((x_pointsr[len(x_pointsr)-1]), (x_pointsr[0]), 0.01)
 
 #spline of x and y points 
 s = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.01) 
-s1 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.1) 
+s1 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.001) 
+s2 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.1) 
 sr = inter.UnivariateSpline(x_pointsr[::-1], y_pointsr[::-1], s=0.01) 
 sd = s1.derivative(1)
+sd2 = s2.derivative(1)
 
 #evaluate derivates of spline with each point in x_points 
 #it gets the 0th to 3rd derivate of the spline
@@ -69,7 +71,9 @@ m = float(sum(fdr)/len(fdr))
 b = float(y_pointsr[len(y_pointsr)-1]-m*x_pointsr[len(x_pointsr)-1])
 yy = m*xxx + b
 
-print(s.__call__(3.445,1))
+pd = []
+for i in deriv:
+    pd.append(i[1])
 
 #plotting the spline
 plt.plot(xx, s(xx), 'b-', label = 'Spline fit')
@@ -78,6 +82,7 @@ plt.scatter(x_points, y_points, label='Data')
 #plotting lineal aprox
 plt.plot(xxx, yy, 'r-', label = 'Aprox')
 plt.plot(xx, sd(xx), 'g-', label = 'deriv')
+plt.plot(xx, sd2(xx), 'y-', label = 'deriv spline')
 #plot 
 plt.legend()
 plt.title("x = "+ str(-b/m))
