@@ -46,7 +46,7 @@ xxr = np.arange((x_pointsr[len(x_pointsr)-1]), (x_pointsr[0]), 0.01)
 #spline of x and y points 
 s = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.01) 
 s1 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.001) 
-s2 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.1) 
+s2 = inter.UnivariateSpline(x_points[::-1], y_points[::-1], s=0.01) 
 sr = inter.UnivariateSpline(x_pointsr[::-1], y_pointsr[::-1], s=0.01) 
 sd = s1.derivative(1)
 sd2 = s2.derivative(1)
